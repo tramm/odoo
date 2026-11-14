@@ -1,16 +1,12 @@
-# -*- coding: utf-8 -*-
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
 {
     'name': 'Customer References',
-    'category': 'Website',
-    'website': 'https://www.odoo.com/page/website-builder',
-    'summary': 'Publish Your Customer References',
-    'version': '1.0',
+    'category': 'Website/Website',
+    'summary': 'Publish your customer references',
     'description': """
-Odoo Customer References
-===========================
-""",
+Publish your customers as business references on your website to attract new potential prospects.
+    """,
     'depends': [
         'website_crm_partner_assign',
         'website_partner',
@@ -22,9 +18,13 @@ Odoo Customer References
     'data': [
         'views/website_customer_templates.xml',
         'views/res_partner_views.xml',
-        'security/ir.model.access.csv',
-        'security/ir_rule.xml',
+        'security/ir.access.csv',
     ],
-    'qweb': [],
-    'installable': True,
+    'author': 'Odoo S.A.',
+    'license': 'LGPL-3',
+    'assets': {
+        'website.website_builder_assets': [
+            'website_customer/static/src/website_builder/**/*',
+        ],
+    },
 }

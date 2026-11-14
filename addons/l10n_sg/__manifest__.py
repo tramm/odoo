@@ -1,37 +1,43 @@
-# -*- coding: utf-8 -*-
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
-
-# Copyright (C) 2014 Tech Receptives (<http://techreceptives.com>)
-
 {
     'name': 'Singapore - Accounting',
+    'website': 'https://www.odoo.com/documentation/latest/applications/finance/fiscal_localizations/singapore.html',
+    'icon': '/account/static/description/l10n.png',
+    'countries': ['sg'],
     'author': 'Tech Receptives',
-    'version': '2.0',
-    'website': 'http://www.techreceptives.com',
-    'category': 'Localization',
+    'version': '2.3',
+    'category': 'Accounting/Localizations/Account Charts',
     'description': """
 Singapore accounting chart and localization.
 =======================================================
 
-After installing this module, the Configuration wizard for accounting is launched.
-    * The Chart of Accounts consists of the list of all the general ledger accounts
-      required to maintain the transactions of Singapore.
-    * On that particular wizard, you will be asked to pass the name of the company,
-      the chart template to follow, the no. of digits to generate, the code for your
-      account and bank account, currency to create journals.
-
-    * The Chart of Taxes would display the different types/groups of taxes such as
-      Standard Rates, Zeroed, Exempted, MES and Out of Scope.
-    * The tax codes are specified considering the Tax Group and for easy accessibility of
-      submission of GST Tax Report.
+This module add, for accounting:
+ - The Chart of Accounts of Singapore
+ - Field UEN (Unique Entity Number) on company and partner
+ - Field PermitNo and PermitNoDate on invoice
 
     """,
-    'depends': ['base', 'account'],
-    'data': [
-             'data/l10n_sg_chart_data.xml',
-             'data/account_data.xml',
-             'data/account_tax_data.xml',
-             'data/account_chart_template_data.yml',
+    'depends': [
+        'account_qr_code_emv',
+        'account',
+        'account_edi_ubl_cii',
+        'account_peppol',
     ],
-    'post_init_hook': '_preserve_tag_on_taxes',
+    'auto_install': ['account'],
+    'data': [
+        'data/account.account.tag.csv',
+        'data/l10n_sg_chart_data.xml',
+        'data/account_tax_report_data.xml',
+        'views/account_invoice_view.xml',
+        'views/report_invoice.xml',
+        'views/report_templates.xml',
+        'views/res_bank_views.xml',
+        'views/res_config_settings_views.xml',
+    ],
+    'demo': [
+        'demo/demo_company.xml',
+    ],
+    'post_init_hook': '_l10n_sg_post_init',
+    'uninstall_hook': '_l10n_sg_uninstall',
+    'license': 'LGPL-3',
 }
